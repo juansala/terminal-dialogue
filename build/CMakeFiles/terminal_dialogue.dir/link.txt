@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/terminal_dialogue.dir/demo.cpp.o -o terminal_dialogue  libdialogue.a 

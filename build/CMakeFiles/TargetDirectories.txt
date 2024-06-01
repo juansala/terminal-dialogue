@@ -1,4 +1,0 @@
-/home/juansala/Documents/Dev/terminal_dialogue/build/CMakeFiles/dialogue.dir
-/home/juansala/Documents/Dev/terminal_dialogue/build/CMakeFiles/terminal_dialogue.dir
-/home/juansala/Documents/Dev/terminal_dialogue/build/CMakeFiles/edit_cache.dir
-/home/juansala/Documents/Dev/terminal_dialogue/build/CMakeFiles/rebuild_cache.dir
