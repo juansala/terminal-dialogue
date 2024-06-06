@@ -1,8 +1,8 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
-#include <iostream>
 #include <string>
+#include <ncurses.h>
 
 class Entity
 {
@@ -20,7 +20,7 @@ public:
     void set_speed(int wpm) {m_wpm = wpm;};
     void set_color(int rgb[3]);
     void set_pause_time(int pause_time) {m_pause_time = pause_time;};
-    void speak(std::string &msg) const;
+    void speak(WINDOW* win, std::string &msg) const;
 
     enum DialogueState
     {

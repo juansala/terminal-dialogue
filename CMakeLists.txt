@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Add dialogue library
 add_library(dialogue dialog.cpp)
 target_include_directories(dialogue PUBLIC ${CMAKE_SOURCE_DIR})
+target_link_libraries(dialogue -lncurses)
 
 # Add the executable
 add_executable(terminal_dialogue demo.cpp)

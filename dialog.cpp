@@ -1,6 +1,8 @@
-#include <chrono>
-#include "dialog.h"
+#include <iostream>
 #include "termcolor.hpp"
+#include <chrono>
+#include <ncurses.h>
+#include "dialog.h"
 
 Entity::Entity(std::string &name, int wpm, int rgb[], int pause_time) :
     // TODO: Add data member for language (for average char per word)
@@ -9,7 +11,6 @@ Entity::Entity(std::string &name, int wpm, int rgb[], int pause_time) :
     m_rgb {rgb[0], rgb[1], rgb[2]}, // TODO: Find better way for init.
     m_pause_time {pause_time}
 {
-    std::cout << "Created entity " << name << "." << std::endl;
 }
 
 void Entity::set_color(int rgb[])
@@ -20,7 +21,7 @@ void Entity::set_color(int rgb[])
     }
 }
 
-void Entity::speak(std::string &msg) const
+void Entity::speak(WINDOW* win, std::string &msg) const
 {
     DialogueState state = TALKING;
     int millis_per_c = 1 / (m_wpm * 4.5 * 1/6e4); // TODO: Use avg char/word from language.
@@ -48,7 +49,8 @@ void Entity::speak(std::string &msg) const
             {
                 state = PAUSE;      
                 pause_start_time = std::chrono::high_resolution_clock::now();
-                std::cout << termcolor::red << msg[i] << std::flush;
+                waddch(win, msg[i] | COLOR_PAIR(1));
+                wrefresh(win);
                 continue;
             }
 
@@ -56,11 +58,8 @@ void Entity::speak(std::string &msg) const
             dt = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - last_time).count();
             if (dt >= millis_per_c)
             {
-                // TODO: What does std::flush do exactly?
-                // const int r = 0;
-                // const int g = 0;
-                // const int b = 0;
-                std::cout << termcolor::red << msg[i] << std::flush; // TODO: Color.
+                waddch(win, msg[i] | COLOR_PAIR(1));
+                wrefresh(win);
                 last_time = std::chrono::high_resolution_clock::now();
                 i++;
             }
