@@ -1,12 +1,11 @@
 #include <iostream>
-#include "entity.h"
 #include <ncurses.h>
+#include "entity.h"
 /* 
 
 TODO:
 - Entity for narration/announcements, then for individual characters?
 */
-
 
 int main(int argc, char* argv[])
 {

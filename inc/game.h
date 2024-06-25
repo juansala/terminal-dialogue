@@ -25,6 +25,7 @@ public:
 
 private:
     int m_num_entities; // Count number of entities.
+    int m_score;
     GameState m_state;
     std::vector<std::string> m_txt;
 };
