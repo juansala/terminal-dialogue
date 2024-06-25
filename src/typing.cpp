@@ -10,7 +10,6 @@ TODO:
 - Entity for narration/announcements, then for individual characters?
 */
 
-
 int main(int argc, char* argv[])
 {
     Game typing_game;

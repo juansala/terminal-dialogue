@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <iostream>
+#include <chrono>
 #include "game.h"
 #include "entity.h"
 
@@ -7,7 +8,9 @@ Game::Game() :
     m_num_entities{0},
     m_state{INIT},
     m_cursor_x{0},
-    m_cursor_y{0}
+    m_cursor_y{0},
+    m_score{0},
+    m_state{INIT}
 {
     // TODO: See which of these actually need to be in this base class?
     initscr();
@@ -46,6 +49,9 @@ void Game::run()
     int input_idx = 0;
     int line_pos[2] = {0, 0};
     int txt_idx = 0;
+    auto start_time = std::chrono::high_resolution_clock::now();
+    auto current_time = std::chrono::high_resolution_clock::now();
+    std::string score_msg = "";
     while (m_state != EXIT)
     {
         if (m_state == GAME_CONTROL)
@@ -58,14 +64,21 @@ void Game::run()
             stream.speak(stdscr, line_pos, m_txt[txt_idx], true);
             move(line_pos[0], line_pos[1]); // TODO: Use member function.
             m_state = PLAYER_CONTROL;
+            start_time = std::chrono::high_resolution_clock::now();
         }
         else if (m_state == PLAYER_CONTROL)
         {
-            if (input_idx == m_txt[txt_idx].length())
+            int txt_length = m_txt[txt_idx].length();
+            if (input_idx == txt_length)
                 {
+                    current_time = std::chrono::high_resolution_clock::now();
+                    m_score = (int) (txt_length / std::chrono::duration_cast<std::chrono::minutes>(current_time - start_time).count());
                     m_state = GAME_CONTROL;
                     input_idx = 0;
                     txt_idx++;
+                    move(line_pos[0], line_pos[1]);
+                    score_msg = "Score: {}" + std::to_string(m_score);
+                    stream.speak(stdscr, line_pos, score_msg, true);
                     continue;
                 }
             else if ((ch = getch()) != ERR)
