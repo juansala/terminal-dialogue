@@ -5,7 +5,9 @@
 
 Game::Game() :
     m_num_entities{0},
-    m_state{INIT}
+    m_state{INIT},
+    m_cursor_x{0},
+    m_cursor_y{0}
 {
     // TODO: See which of these actually need to be in this base class?
     initscr();
@@ -43,8 +45,6 @@ void Game::run()
     char ch{0};
     int input_idx = 0;
     int line_pos[2] = {0, 0};
-    int cursor_x = 0; // TODO: Add as a Game member.
-    int cursor_y = 0; // TODO: Add as a Game member.
     int txt_idx = 0;
     while (m_state != EXIT)
     {
@@ -72,9 +72,9 @@ void Game::run()
             {
                 if (ch != m_txt[txt_idx][input_idx])
                 {
-                    getyx(stdscr, cursor_y, cursor_x);
+                    getyx(stdscr, m_cursor_y, m_cursor_x);
                     addch(m_txt[txt_idx][input_idx] | COLOR_PAIR(2));
-                    move(cursor_y, cursor_x);
+                    move(m_cursor_y, m_cursor_x);
                     continue;
                 }
 
