@@ -12,7 +12,7 @@ TODO:
 
 int main(int argc, char* argv[])
 {
-    Game typing_game;
-    typing_game.run();
-    return 0;
+  Game typing_game;
+  typing_game.run();
+  return 0;
 }
