@@ -8,10 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add dialogue library
-add_subdirectory(${CMAKE_SOURCE_DIR}/src)
+add_subdirectory(src)
 
-# Add the executable
-add_executable(terminal_dialogue src/typing.cpp)
-
-# Link the dialogue library
-target_link_libraries(terminal_dialogue dialogue)
+# Add the examples subdirectory
+add_subdirectory(examples)

@@ -1,11 +1,10 @@
-#include <iostream>
 #include <ncurses.h>
 #include "entity.h"
-/* 
 
-TODO:
-- Entity for narration/announcements, then for individual characters?
-*/
+// Simple example which demonstrates simple animated dialogue text using the
+// Entity class.
+// TODO(juansala): Wrap the common ncurses function calls into a convenient
+// function or class (maybe ScreenManager?).
 
 int main(int argc, char* argv[])
 {
@@ -24,8 +23,6 @@ int main(int argc, char* argv[])
   std::string e1_msg = "I am alive! Check me out! I am ... pausing, almost whenever I want. What do you think?";
   int xy[2] {0, 0};
   e1.speak(stdscr, xy, e1_msg, false);
-
-
 
   std::string return_msg = "Press any key to continue...";
   e1.set_color(COLOR_PAIR(0));
