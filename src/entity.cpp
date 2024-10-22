@@ -1,6 +1,3 @@
-#include <iostream>
-#include <chrono>
-#include <ncurses.h>
 #include "entity.h"
 
 Entity::Entity()

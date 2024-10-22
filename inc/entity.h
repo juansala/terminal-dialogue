@@ -1,6 +1,9 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
+#include <iostream>
+#include <chrono>
+
 #include <string>
 #include <ncurses.h>
 
