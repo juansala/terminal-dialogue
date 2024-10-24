@@ -12,3 +12,6 @@ add_subdirectory(examples)
 
 # Add game subdirectory
 add_subdirectory(game)
+
+# Add graphics subdirectroy
+add_subdirectory(graphics)
