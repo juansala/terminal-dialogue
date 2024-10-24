@@ -1,10 +1,13 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <vector>
 #include <chrono>
 
 #include <ncurses.h>
 
-#include "entity.h"
+#include "terminal_dialogue/game/entity.h"
 /*
 TODO:
 - Add entities through member function.
@@ -34,3 +37,5 @@ protected:
   int m_cursor_x;
   int m_cursor_y;
 };
+
+#endif

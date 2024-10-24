@@ -1,4 +1,4 @@
-#include "game.h"
+#include "terminal_dialogue/game/game.h"
 
 Game::Game() :
     m_num_entities{0},

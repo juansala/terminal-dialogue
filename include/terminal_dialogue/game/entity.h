@@ -1,5 +1,5 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <iostream>
 #include <chrono>

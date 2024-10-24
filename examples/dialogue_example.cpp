@@ -1,5 +1,5 @@
 #include <ncurses.h>
-#include "entity.h"
+#include "terminal_dialogue/game/entity.h"
 
 // Simple example which demonstrates simple animated dialogue text using the
 // Entity class.

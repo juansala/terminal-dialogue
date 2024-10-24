@@ -7,8 +7,8 @@ project(terminal_dialogue VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add dialogue library
-add_subdirectory(src)
-
-# Add the examples subdirectory
+# Add examples subdirectory
 add_subdirectory(examples)
+
+# Add game subdirectory
+add_subdirectory(game)

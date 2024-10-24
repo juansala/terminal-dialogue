@@ -1,5 +1,8 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <iostream>
-#include "entity.h"
+#include "terminal_dialogue/game/entity.h"
 
 class Player: public Entity
 {
@@ -13,3 +16,5 @@ public:
   void sub_pts(int penalty) { m_score += penalty; }
   int get_score() { return m_score; };
 };
+
+#endif
