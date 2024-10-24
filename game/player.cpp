@@ -1,4 +1,4 @@
-#include "terminal_dialogue/game/player.h"
+#include "terminal_dialogue/game/player.hpp"
 
 Player::Player()
 {

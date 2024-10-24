@@ -1,5 +1,5 @@
-#include "terminal_dialogue/game/game.h"
-#include "terminal_dialogue/game/player.h"
+#include "terminal_dialogue/game/game.hpp"
+#include "terminal_dialogue/game/player.hpp"
 
 // Simple typing game which demonstrates how to implement a custom TypingGame 
 // class and how to run the game.

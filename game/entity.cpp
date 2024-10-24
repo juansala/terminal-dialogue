@@ -1,4 +1,4 @@
-#include "terminal_dialogue/game/entity.h"
+#include "terminal_dialogue/game/entity.hpp"
 
 Entity::Entity()
 {

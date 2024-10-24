@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include <iostream>
 #include <vector>
@@ -7,7 +7,7 @@
 
 #include <ncurses.h>
 
-#include "terminal_dialogue/game/entity.h"
+#include "terminal_dialogue/game/entity.hpp"
 /*
 TODO:
 - Add entities through member function.
