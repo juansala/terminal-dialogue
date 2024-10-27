@@ -15,20 +15,23 @@ class Geometry
 {
 public:
   Geometry() {};
-  ~Geometry() {};
+  ~Geometry() {}; // TODO(juansala): Make virtual?
 
   virtual void draw() {};
-  void set_pixel_type(char c) { m_pixel_type = c; }
-  void set_origin(int x, int y);
   int get_x() { return m_x; };
   int get_y() { return m_y; };
 
-  // Make these protected?
+  void set_origin(int x, int y);
+  void set_fill_rgba(const Color& color) { m_fill = color; };
+  void set_border_rgba(const Color& color) { m_border = color; };
+  void set_pixel_type(char c) { m_pixel_type = c; }
+
+private:
+  int m_x;
+  int m_y;
   Color m_fill;
   Color m_border;
   char m_pixel_type;
-  int m_x;
-  int m_y;
 };
 
 // TODO(juansala): Add tile functionality.
@@ -37,9 +40,6 @@ class Shape : public Geometry
 public:
   Shape() {};
   ~Shape() {};
-
-  void set_fill_rgba(const Color& color) { m_fill = color; };
-  void set_border_rgba(const Color& color) { m_border = color; };
 };
 
 #endif
