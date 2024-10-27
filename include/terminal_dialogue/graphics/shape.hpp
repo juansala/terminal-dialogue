@@ -15,6 +15,7 @@ class Geometry
 {
 public:
   Geometry() {};
+  Geometry(int x, int y, char pixel_type);
   ~Geometry() {}; // TODO(juansala): Make virtual?
 
   virtual void draw() {};
@@ -26,7 +27,7 @@ public:
   void set_border_rgba(const Color& color) { m_border = color; };
   void set_pixel_type(char c) { m_pixel_type = c; }
 
-private:
+protected:
   int m_x;
   int m_y;
   Color m_fill;
@@ -39,6 +40,7 @@ class Shape : public Geometry
 {
 public:
   Shape() {};
+  Shape(int x, int y, char pixel_type);
   ~Shape() {};
 };
 

@@ -1,11 +1,10 @@
-#include <iostream>
 #include "terminal_dialogue/graphics/rectangle.hpp"
 
-Rectangle::Rectangle() {}
+Rectangle::Rectangle(int x, int y, char pixel_type, int width, int height)
+  : Shape{ x, y, pixel_type },
+    m_width{ width },
+    m_height{ height }
+{}
 
-Rectangle::~Rectangle() {}
-
-void Rectangle::draw()
-{
-  std::cout << "In Rectangle.draw" << std::endl;
-}
+// TODO(juansala, 10/27/2024)
+void Rectangle::draw() {}
