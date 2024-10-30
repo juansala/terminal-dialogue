@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include <ncurses.h>
+#include "terminal_dialogue/graphics/draw.hpp"
 
 struct Color
 {

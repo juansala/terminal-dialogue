@@ -1,5 +1,5 @@
 # Add core library source files
-add_library(graphics rectangle.cpp shape.cpp)
+add_library(graphics rectangle.cpp shape.cpp draw.cpp)
 
 # Add include directories
 target_include_directories(graphics PUBLIC ${CMAKE_SOURCE_DIR}/include)
