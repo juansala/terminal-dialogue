@@ -22,9 +22,24 @@ void restore_terminal_settings()
   endwin();
 }
 
-void add_pixel_char(int x, int y, char pixel_type, char attribute)
+int read_input()
+{
+  return getch();
+}
+
+void add_pixel_char(int x, int y, char pixel_type, Window* win_ptr, 
+                    char attribute)
 {
   // TODO(juansala): Handle character attributes.
-  mvaddch(y, x, pixel_type);
-  refresh();
+  if (!win_ptr)
+  {
+    // No window given, write to `stdscr`
+    mvaddch(y, x, pixel_type);
+    refresh();
+  }
+  else
+  {
+    mvwaddch(win_ptr, y, x, pixel_type);
+    wrefresh(win_ptr);
+  }
 }
