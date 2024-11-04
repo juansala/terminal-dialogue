@@ -2,10 +2,10 @@
 
 int main(int argc, char* argv[])
 {
-  initialize_ncurses(true, true, true, true);
-  Rectangle rect(5, 5, 'A', 5, 5);
+  ncurses_wrapper::initialize(true, true, true, true);
+  Rectangle rect(0, 0, 'X', 5, 5);
   rect.draw();
-  read_input();
-  restore_terminal_settings();
+  ncurses_wrapper::read_input();
+  ncurses_wrapper::restore_terminal_settings();
   return 0;
 }
