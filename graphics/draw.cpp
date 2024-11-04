@@ -1,6 +1,6 @@
 #include "terminal_dialogue/graphics/draw.hpp"
 
-void initialize_ncurses(bool one_char, bool no_echo, bool special_keys, 
+void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys, 
                         bool use_color)
 {
   initscr();
@@ -17,17 +17,17 @@ void initialize_ncurses(bool one_char, bool no_echo, bool special_keys,
   // terminals.
 }
 
-void restore_terminal_settings()
+void ncurses_wrapper::restore_terminal_settings()
 {
   endwin();
 }
 
-int read_input()
+int ncurses_wrapper::read_input()
 {
   return getch();
 }
 
-void add_pixel_char(int x, int y, char pixel_type, Window* win_ptr, 
+void ncurses_wrapper::add_pixel_char(int x, int y, char pixel_type, Window* win_ptr, 
                     char attribute)
 {
   // TODO(juansala): Handle character attributes.
