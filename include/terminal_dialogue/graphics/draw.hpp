@@ -9,13 +9,34 @@
 // interface, please refer to online resources (e.g. Ncurses Programming Guide
 // by J.B. Wyatt) or check out the library source code.
 
+// Is graphics something that should eventually be handled by the GPU? I would
+// guess that's not necessary (perhaps impossible) given it's literally text.
+
 // TODO(juansala): Convert raw pointers to smart pointers.
 // TODO(juansala): Check out this square font: https://strlen.com/square/
+// TODO(juansala): Redefine functions using outdated types (e.g. short).
 
 using Window = WINDOW;
 
+struct Color
+{
+  uint8_t r;
+  uint8_t g;
+  uint8_t b;
+  uint8_t a;
+};
+
 namespace ncurses_wrapper
 {
+
+  // TODO(juansala): All remaining colors.
+  namespace Colors
+  {
+    inline const Color red = {255, 0, 0, 255};
+    inline const Color green = {0, 255, 0, 255};
+    inline const Color blue = {0, 0, 255, 255};
+    inline const Color white = {0, 0, 0, 255};
+  };
 
   struct CharAttributes
   {
@@ -78,8 +99,9 @@ namespace ncurses_wrapper
 
   int read_input();
 
-  void add_pixel_char(int x, int y, char pixel_type, Window* win_ptr = nullptr, 
-                      char attribute = CharAttributes::normal);
+  void add_pixel_char(int x, int y, unsigned int pixel_type, const Color& color,
+                      Window* win_ptr = nullptr,
+                      unsigned int attribute = CharAttributes::normal);
 
 };
 

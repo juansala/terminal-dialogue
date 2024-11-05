@@ -5,14 +5,17 @@
 
 class Rectangle : public Shape
 {
+
 public:
-  Rectangle() {};
-  Rectangle(int x, int y, char pixel_type, int width, int height);
-  ~Rectangle() {};
+  Rectangle() {}
+  Rectangle(int x, int y, char pixel_type, int width, int height, 
+            const Color& fill = ncurses_wrapper::Colors::white,
+            const Color& border = ncurses_wrapper::Colors::white);
+  ~Rectangle() {}
 
   void draw() override;
-  void set_width(int width) { m_width = width; };
-  void set_height(int height) { m_height = height; };
+  void set_width(int width) { m_width = width; }
+  void set_height(int height) { m_height = height; }
 
 private:
   int m_width;
