@@ -14,7 +14,7 @@ public:
 
   void add_pts(int reward) { m_score += reward; }
   void sub_pts(int penalty) { m_score += penalty; }
-  int get_score() { return m_score; };
+  int get_score() { return m_score; }
 };
 
 #endif
