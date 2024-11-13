@@ -1,5 +1,5 @@
-#ifndef DRAW_HPP
-#define DRAW_HPP
+#ifndef NCURSES_WRAPPER_HPP
+#define NCURSES_WRAPPER_HPP
 
 #include <ncurses.h>
 

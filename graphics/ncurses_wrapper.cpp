@@ -1,4 +1,4 @@
-#include "terminal_dialogue/graphics/draw.hpp"
+#include "terminal_dialogue/graphics/ncurses_wrapper.hpp"
 
 void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys, 
                                  bool use_color)

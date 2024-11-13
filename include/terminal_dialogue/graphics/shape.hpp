@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "terminal_dialogue/graphics/draw.hpp"
+#include "terminal_dialogue/graphics/ncurses_wrapper.hpp"
 
 class Geometry
 {
