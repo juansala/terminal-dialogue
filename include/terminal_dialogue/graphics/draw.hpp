@@ -13,30 +13,66 @@
 // guess that's not necessary (perhaps impossible) given it's literally text.
 
 // TODO(juansala): Convert raw pointers to smart pointers.
-// TODO(juansala): Check out this square font: https://strlen.com/square/
+// TODO(juansala): Auto-select this square font: https://strlen.com/square/
 // TODO(juansala): Redefine functions using outdated types (e.g. short).
 
 using Window = WINDOW;
 
-struct Color
-{
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-  uint8_t a;
-};
-
 namespace ncurses_wrapper
 {
-
-  // TODO(juansala): All remaining colors.
-  namespace Colors
+  struct Color
   {
-    inline const Color red = {255, 0, 0, 255};
-    inline const Color green = {0, 255, 0, 255};
-    inline const Color blue = {0, 0, 255, 255};
-    inline const Color white = {0, 0, 0, 255};
+    uint8_t red;
+    uint8_t green;
+    uint8_t blue;
+    size_t id;
   };
+
+  struct DefaultColors
+  {
+    static constexpr Color BLACK = {255, 255, 255, 0};
+    static constexpr Color RED = {255, 0, 0, 1};
+    static constexpr Color GREEN = {0, 255, 0, 2};
+    static constexpr Color YELLOW = {255, 255, 0, 3};
+    static constexpr Color BLUE = {0, 0, 255, 4};
+    static constexpr Color MAGENTA = {255, 0, 255, 5};
+    static constexpr Color CYAN = {0, 255, 255, 6};
+    static constexpr Color WHITE = {0, 0, 0, 7};
+  };
+
+  struct ColorPair
+  {
+    Color foreground;
+    Color background;
+    size_t id;
+  };
+
+  struct DefaultColorPairs
+  {
+    static constexpr ColorPair CLASSIC = {DefaultColors::WHITE, 
+                                      DefaultColors::BLACK, 0};
+    static constexpr ColorPair CLASSIC_RED = {DefaultColors::RED,
+                                          DefaultColors::BLACK, 1};
+    static constexpr ColorPair CLASSIC_BLUE = {DefaultColors::BLUE,
+                                           DefaultColors::BLACK, 2};
+    static constexpr ColorPair CLASSIC_GREEN = {DefaultColors::GREEN,
+                                            DefaultColors::BLACK, 3};
+    static const size_t n_pairs = 4;
+    static constexpr ColorPair pairs[n_pairs] = {CLASSIC,
+                                             CLASSIC_RED,
+                                             CLASSIC_BLUE,
+                                             CLASSIC_GREEN};
+  };
+
+  // TODO(juansala): Track imported colors using an array or map. Keys could be
+  // strings defined by user in a config file.
+  // struct ColorConfig
+  // {
+    // static const size_t NUM_COLORS = 256;
+    // static const size_t NUM_COLOR_PAIRS = 256;
+    // static const Color colors[NUM_COLORS];
+    // static const ColorPair color_pairs[NUM_COLOR_PAIRS];
+  // };
 
   struct CharAttributes
   {
@@ -52,7 +88,6 @@ namespace ncurses_wrapper
     static const unsigned int invisible = A_INVIS;           // Invisible mode
     static const unsigned int alt_char_set = A_ALTCHARSET;   // Alternate char set
     static const unsigned int extract = A_CHARTEXT;          // Bit-mask to extract a character
-    // TODO(juansala): Handle color pairs.
   };
 
   // TODO(juansala): Special chars not displaying properly. Check locale.
@@ -93,14 +128,18 @@ namespace ncurses_wrapper
   };
 
   void initialize(bool one_char, bool no_echo, bool special_keys, 
-                          bool use_color);
+                  bool use_color);
+
+  void initialize_pairs();
+
+  void parse_color_file();
 
   void restore_terminal_settings();
 
   int read_input();
 
-  void add_pixel_char(int x, int y, unsigned int pixel_type, const Color& color,
-                      Window* win_ptr = nullptr,
+  void add_pixel_char(int x, int y, unsigned int pixel_type, 
+                      ColorPair color_pair, Window* win_ptr = nullptr,
                       unsigned int attribute = CharAttributes::normal);
 
 };

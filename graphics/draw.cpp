@@ -1,7 +1,7 @@
 #include "terminal_dialogue/graphics/draw.hpp"
 
 void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys, 
-                        bool use_color)
+                                 bool use_color)
 {
   initscr();
   if (one_char)
@@ -11,12 +11,21 @@ void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys,
   if (special_keys)
     keypad(stdscr, true);
   if (use_color)
+  {
     start_color();
+    initialize_pairs();
+  }
 
   // TODO(juansala): Handle multiple windows beyond `stdscr` and multiple
   // terminals.
+}
 
-  // TODO(juansala): Initialize new colors.
+void ncurses_wrapper::initialize_pairs()
+{
+  for (auto& pair : DefaultColorPairs::pairs)
+  {
+    init_pair(pair.id, pair.foreground.id, pair.background.id);
+  }
 }
 
 void ncurses_wrapper::restore_terminal_settings()
@@ -30,13 +39,10 @@ int ncurses_wrapper::read_input()
 }
 
 void ncurses_wrapper::add_pixel_char(int x, int y, unsigned int pixel_type, 
-                                     const Color& color, Window* win_ptr, 
-                                     unsigned int attribute)
+                                     ncurses_wrapper::ColorPair color_pair, 
+                                     Window* win_ptr, unsigned int attribute)
 {
-  // TODO(juansala): Keep track of added colors to avoid doing this every pixel?
-  init_color(8, color.r, color.g, color.b);
-  init_pair(1, 8, 0);
-  unsigned int pixel = pixel_type | COLOR_PAIR(1) | attribute;
+  unsigned int pixel = pixel_type | COLOR_PAIR(color_pair.id) | attribute;
   // TODO(juansala): Handle character attributes.
   if (!win_ptr)
   {

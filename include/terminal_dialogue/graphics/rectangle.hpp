@@ -5,12 +5,13 @@
 
 class Rectangle : public Shape
 {
-
 public:
+  using ColorPair = ncurses_wrapper::ColorPair;
+  using DefaultColorPairs = ncurses_wrapper::DefaultColorPairs;
   Rectangle() {}
   Rectangle(int x, int y, char pixel_type, int width, int height, 
-            const Color& fill = ncurses_wrapper::Colors::white,
-            const Color& border = ncurses_wrapper::Colors::white);
+            ColorPair fill = DefaultColorPairs::CLASSIC,
+            ColorPair border = DefaultColorPairs::CLASSIC);
   ~Rectangle() {}
 
   void draw() override;
