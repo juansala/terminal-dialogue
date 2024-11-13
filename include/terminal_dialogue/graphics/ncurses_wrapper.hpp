@@ -50,18 +50,18 @@ namespace ncurses_wrapper
   struct DefaultColorPairs
   {
     static constexpr ColorPair CLASSIC = {DefaultColors::WHITE, 
-                                      DefaultColors::BLACK, 0};
+                                          DefaultColors::BLACK, 0};
     static constexpr ColorPair CLASSIC_RED = {DefaultColors::RED,
-                                          DefaultColors::BLACK, 1};
+                                              DefaultColors::BLACK, 1};
     static constexpr ColorPair CLASSIC_BLUE = {DefaultColors::BLUE,
-                                           DefaultColors::BLACK, 2};
+                                               DefaultColors::BLACK, 2};
     static constexpr ColorPair CLASSIC_GREEN = {DefaultColors::GREEN,
-                                            DefaultColors::BLACK, 3};
+                                                DefaultColors::BLACK, 3};
     static const size_t n_pairs = 4;
     static constexpr ColorPair pairs[n_pairs] = {CLASSIC,
-                                             CLASSIC_RED,
-                                             CLASSIC_BLUE,
-                                             CLASSIC_GREEN};
+                                                 CLASSIC_RED,
+                                                 CLASSIC_BLUE,
+                                                 CLASSIC_GREEN};
   };
 
   // TODO(juansala): Track imported colors using an array or map. Keys could be
@@ -132,7 +132,7 @@ namespace ncurses_wrapper
 
   void initialize_pairs();
 
-  void parse_color_file();
+  // void parse_color_file();
 
   void restore_terminal_settings();
 
