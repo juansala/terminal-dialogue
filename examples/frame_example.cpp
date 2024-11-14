@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[])
 {
-  ncurses_wrapper::initialize(true, true, true, true);
+  ncurses_wrapper::initialize(true, true, true, true, false);
 
   std::vector<Geometry::SharedPtr> elements;
   for (int i = 0; i <= 5; i++)
@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
   Frame frame(elements);
   frame.draw();
   
+  ncurses_wrapper::window_refresh();
   ncurses_wrapper::read_input();
   ncurses_wrapper::restore_terminal_settings();
 }
