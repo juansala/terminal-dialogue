@@ -17,7 +17,7 @@ public:
 
   void draw();
 private:
-  std::vector<Geometry::SharedPtr> m_elements; 
+  std::vector<Geometry::SharedPtr> m_elements;
   size_t m_num_elements;
 };
 
