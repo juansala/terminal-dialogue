@@ -1,17 +1,21 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
+#include <iostream>
+#include <memory>
+
 #include "terminal_dialogue/graphics/ncurses_wrapper.hpp"
 
 class Geometry
 {
 public:
+  using SharedPtr = std::shared_ptr<Geometry>;
   using ColorPair = ncurses_wrapper::ColorPair;
   Geometry() {}
   Geometry(int x, int y, char pixel_type, ColorPair fill, ColorPair border);
   ~Geometry() {} // TODO(juansala): Make virtual?
 
-  virtual void draw() {}
+  virtual void draw() {std::cout << "In class Geometry" << std::endl;}
   int get_x() { return m_x; }
   int get_y() { return m_y; }
 
@@ -35,6 +39,8 @@ public:
   Shape() {}
   Shape(int x, int y, char pixel_type, ColorPair fill, ColorPair border);
   ~Shape() {}
+
+  virtual void draw() {std::cout << "In class Shape" << std::endl;}
 };
 
 #endif
