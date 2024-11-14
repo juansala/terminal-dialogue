@@ -9,11 +9,13 @@ Tested on Ubuntu 22.04 (WSL).
 - libncursesw5-dev
 - CMake >= 3.10
 
-## Try Examples
+## Build and Run Examples
 - Clone this repo somewhere on your Linux machine: ```git clone https://github.com/juansala/terminal-dialogue.git```
 - ```cd terminal-dialogue && mkdir build```
 - ```cd build && cmake ..```
 - ```cmake --build .```
+- Run the demo executables in ```examples/```:
+  - e.g. ```./build/examples/dialogue_example``` (full path)
 
 ## Import into a CMake project
 Fetch ```terminal-dialogue``` from source for your project using the template CMakeLists file.
