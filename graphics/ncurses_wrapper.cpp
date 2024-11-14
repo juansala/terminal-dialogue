@@ -1,7 +1,7 @@
 #include "terminal_dialogue/graphics/ncurses_wrapper.hpp"
 
 void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys, 
-                                 bool use_color)
+                                 bool use_color, bool no_delay)
 {
   initscr();
   if (one_char)
@@ -16,6 +16,11 @@ void ncurses_wrapper::initialize(bool one_char, bool no_echo, bool special_keys,
     initialize_pairs();
   }
 
+  nodelay(stdscr, no_delay);
+  curs_set(0); // TODO(juansala): Handle hiding cursor. 
+
+  // TODO(juansala): Handle enabling special keys.
+
   // TODO(juansala): Handle multiple windows beyond `stdscr` and multiple
   // terminals.
 }
@@ -26,6 +31,22 @@ void ncurses_wrapper::initialize_pairs()
   {
     init_pair(pair.id, pair.foreground.id, pair.background.id);
   }
+}
+
+void ncurses_wrapper::window_refresh(Window* win_ptr)
+{
+  if (!win_ptr)
+    refresh();
+  else
+    wrefresh(win_ptr);
+}
+
+void ncurses_wrapper::window_clear(Window* win_ptr)
+{
+  if (!win_ptr)
+    erase();
+  else
+    werase(win_ptr);
 }
 
 void ncurses_wrapper::restore_terminal_settings()
@@ -48,11 +69,11 @@ void ncurses_wrapper::add_pixel_char(int x, int y, unsigned int pixel_type,
   {
     // No window given, write to `stdscr`
     mvaddch(y, x, pixel);
-    refresh();
+    // refresh(); // Need this refresh here?
   }
   else
   {
     mvwaddch(win_ptr, y, x, pixel);
-    wrefresh(win_ptr);
+    // wrefresh(win_ptr); // Need this refresh here?
   }
 }

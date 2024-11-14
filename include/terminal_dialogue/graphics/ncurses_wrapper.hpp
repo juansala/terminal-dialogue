@@ -15,6 +15,8 @@
 // TODO(juansala): Convert raw pointers to smart pointers.
 // TODO(juansala): Auto-select this square font: https://strlen.com/square/
 // TODO(juansala): Redefine functions using outdated types (e.g. short).
+// TODO(juansala): Switch to std::array for best modern practice (constexpr).
+// TODO(juansala): Add multiple windows.
 
 using Window = WINDOW;
 
@@ -127,12 +129,22 @@ namespace ncurses_wrapper
     inline unsigned int vline = ACS_VLINE;             // vertical line
   };
 
+  namespace InputKeys
+  {
+    inline unsigned int NONE = ERR;
+    // TODO(juansala): Define remaining special keys.
+  }
+
   void initialize(bool one_char, bool no_echo, bool special_keys, 
-                  bool use_color);
+                  bool use_color, bool no_delay=true);
 
   void initialize_pairs();
 
   // void parse_color_file();
+
+  void window_refresh(Window* win_ptr = nullptr);
+
+  void window_clear(Window* win_ptr = nullptr);
 
   void restore_terminal_settings();
 
