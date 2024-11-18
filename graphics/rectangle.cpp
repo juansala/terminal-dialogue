@@ -10,6 +10,7 @@ Rectangle::Rectangle(int x, int y, char pixel_type, int width, int height,
 
 void Rectangle::draw()
 {
+  // TODO(juansala): Try iterating over y first, then x to follow memory.
   for (int i = m_x; i < m_x + m_width; i++)
   {
     for (int j = m_y; j < m_y + m_height; j++)
