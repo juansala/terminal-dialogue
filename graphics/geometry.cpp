@@ -27,7 +27,7 @@ Point::Point(int x, int y, char pixel_type, ColorPair color)
 
 void Point::draw()
 {
-  ncurses_wrapper::add_pixel_char(m_x, m_y, m_pixel_type, color);
+  ncurses_wrapper::add_pixel_char(m_x, m_y, m_pixel_type, m_color);
 }
 
 Line::Line(int x_i, int y_i, int x_f, int y_f, char pixel_type, ColorPair color)
