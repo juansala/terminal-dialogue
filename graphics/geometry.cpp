@@ -35,5 +35,7 @@ Line::Line(int x_i, int y_i, int x_f, int y_f, char pixel_type, ColorPair color)
     m_color { color }
 {}
 
+// TODO(juansala): Use Bresenham algorithm to draw lines between arbitrary
+// points.
 void Line::draw()
 {}
