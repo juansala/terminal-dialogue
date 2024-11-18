@@ -27,7 +27,6 @@ protected:
   char m_pixel_type;
 };
 
-// TODO(juansala): Add tile functionality.
 class Shape : public Geometry
 {
 public:
@@ -44,5 +43,33 @@ protected:
   ColorPair m_fill;
   ColorPair m_border;
 };
+
+class Point : public Geometry
+{
+public:
+  Point() {}
+  Point(int x, int y, char pixel_type, ColorPair color);
+  ~Point() {}
+
+  virtual void draw() override;
+
+protected:
+  ColorPair m_color;
+};
+
+class Line : public Geometry
+{
+public:
+  Line() {}
+  Line(int x_i, int y_i, int x_f, int y_f, char pixel_type, ColorPair color);
+  ~Line() {}
+
+  virtual void draw() override;
+
+protected:
+  ColorPair m_color;
+};
+
+// TODO(juansala): Add curve.
 
 #endif

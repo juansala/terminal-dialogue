@@ -1,7 +1,7 @@
 # Add core library source files
 add_library(graphics 
             rectangle.cpp 
-            shape.cpp 
+            geometry.cpp 
             frame.cpp 
             ncurses_wrapper.cpp)
 

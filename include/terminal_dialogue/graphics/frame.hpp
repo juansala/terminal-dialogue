@@ -3,7 +3,6 @@
 
 #include <vector>
 
-#include "terminal_dialogue/graphics/shape.hpp"
 #include "terminal_dialogue/graphics/rectangle.hpp"
 
 // TODO(juansala): Implement a Frame class that can contain a number of

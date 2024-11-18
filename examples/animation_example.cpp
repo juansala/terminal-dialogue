@@ -2,7 +2,7 @@
 #include <thread>
 
 #include "terminal_dialogue/graphics/frame.hpp"
-#include "terminal_dialogue/graphics/shape.hpp"
+#include "terminal_dialogue/graphics/geometry.hpp"
 #include "terminal_dialogue/graphics/rectangle.hpp"
 
 int main(int argc, char* argv[])
