@@ -15,8 +15,8 @@ public:
   ~Rectangle() {}
 
   // Draw the rectangle with the upper-left vertex at the origin defined by m_x
-  // and m_y. Intended usage is a call by a Frame object that draws the entire
-  // graphical frame.
+  // and m_y. Intended usage is a call by a Renderer object that draws the 
+  // entire graphical frame.
   virtual void draw() override;
 
   void set_width(int width) { m_width = width; }

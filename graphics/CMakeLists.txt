@@ -2,7 +2,7 @@
 add_library(graphics 
             rectangle.cpp 
             geometry.cpp 
-            frame.cpp 
+            renderer.cpp 
             ncurses_wrapper.cpp)
 
 # Add include directories

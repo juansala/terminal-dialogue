@@ -1,4 +1,4 @@
-#include "terminal_dialogue/graphics/frame.hpp"
+#include "terminal_dialogue/graphics/renderer.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -10,8 +10,8 @@ int main(int argc, char* argv[])
     elements.push_back(std::make_shared<Rectangle>(0, 5*i, '*', 3, 3));
   }
 
-  Frame frame(elements);
-  frame.draw();
+  Renderer renderer;
+  renderer.draw(elements);
   
   ncurses_wrapper::window_refresh();
   ncurses_wrapper::read_input();

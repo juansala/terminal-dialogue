@@ -1,7 +1,7 @@
 #include <chrono>
 #include <thread>
 
-#include "terminal_dialogue/graphics/frame.hpp"
+#include "terminal_dialogue/graphics/renderer.hpp"
 #include "terminal_dialogue/graphics/rectangle.hpp"
 #include "terminal_dialogue/utils/timer.hpp"
 
@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
   std::vector<Geometry::SharedPtr> elements;
   auto rect_ptr = std::make_shared<Rectangle>(0, 0, '*', 5, 5);
   elements.push_back(rect_ptr);
-  Frame frame(elements);
+  Renderer renderer;
 
   while(ncurses_wrapper::read_input() == ncurses_wrapper::InputKeys::NONE)
   {
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
         geom->set_origin(geom->get_x() + 1, 0.0);
       }
       ncurses_wrapper::window_clear();
-      frame.draw();
+      renderer.draw(elements);
       ncurses_wrapper::window_refresh();
       timer_ptr->reset();
     }
