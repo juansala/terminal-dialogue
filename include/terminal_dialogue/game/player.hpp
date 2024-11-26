@@ -1,20 +1,24 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <iostream>
 #include "terminal_dialogue/game/entity.hpp"
+#include "terminal_dialogue/graphics/rectangle.hpp"
 
-class Player: public Entity
+class Player : public Entity
 {
-private:
-  int m_player_id;
-  int m_score;
 public:
-  Player();
+  using SharedPtr = std::shared_ptr<Player>;
+  Player() {}
+  Player(int x, int y, int move_speed = 1);
+  ~Player() {};
 
-  void add_pts(int reward) { m_score += reward; }
-  void sub_pts(int penalty) { m_score += penalty; }
-  int get_score() { return m_score; }
+  virtual void update() override;
+  virtual void draw() override;
+
+protected:
+  // Characteristics, score, buffs/debuffs, etc are protected attributes
+  Geometry::SharedPtr m_geom;
+  int m_move_speed;
 };
 
 #endif

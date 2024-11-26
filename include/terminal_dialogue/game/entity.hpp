@@ -2,35 +2,31 @@
 #define ENTITY_HPP
 
 #include <iostream>
+#include <cstddef>
 #include <chrono>
+#include <memory>
 
-#include <string>
-#include <ncurses.h>
+#include "terminal_dialogue/graphics/geometry.hpp"
 
 class Entity
 {
-private:
-  std::string m_name; // Entity name
-  int m_wpm; // dialog speed, in wpm
-  int m_color_pair; // ncurses color pair number
-  const int RGB_SIZE{3}; // TODO: Initialize in constructor?
-  int m_pause_time; // pause duration, in ms
-
 public:
-  Entity();
-  Entity(std::string &name, int wpm, int color_pair, int pause_time);
+  using SharedPtr = std::shared_ptr<Entity>;
+  Entity(int x = 0, int y = 0);
+  ~Entity() {}
 
-  std::string name() { return m_name; }
-  void set_speed(int wpm) { m_wpm = wpm; }
-  void set_color(int color_pair) { m_color_pair = color_pair; }
-  void set_pause_time(int pause_time) { m_pause_time = pause_time; }
-  void speak(WINDOW* win, int xy[], std::string &msg, bool print) const;
+  virtual void update() {};
+  virtual void draw() {};
 
-  enum DialogueState
-  {
-    TALKING,
-    PAUSE
-  };
+  void set_position(int x, int y);
+  void get_position(int& x, int& y);
+
+protected:
+  int m_x;
+  int m_y;
+  std::size_t m_id;
+  bool m_is_active;
+  Geometry::SharedPtr geom;
 };
 
 #endif

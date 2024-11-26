@@ -131,8 +131,12 @@ namespace ncurses_wrapper
 
   namespace InputKeys
   {
-    inline unsigned int NONE = ERR;
-    // TODO(juansala): Define remaining special keys.
+    inline const unsigned int NONE = ERR;
+    inline const unsigned int UP = KEY_UP;
+    inline const unsigned int LEFT = KEY_LEFT;
+    inline const unsigned int RIGHT = KEY_RIGHT;
+    inline const unsigned int DOWN = KEY_DOWN;
+    inline const unsigned int SPACE = ' ';
   }
 
   void initialize(bool one_char, bool no_echo, bool special_keys, 

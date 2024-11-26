@@ -15,3 +15,6 @@ add_subdirectory(game)
 
 # Add graphics subdirectroy
 add_subdirectory(graphics)
+
+# Add core subdirectory
+add_subdirectory(core)
