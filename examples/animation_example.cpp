@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   elements.push_back(rect_ptr);
   Renderer renderer;
 
-  while(ncurses_wrapper::read_input() == ncurses_wrapper::InputKeys::NONE)
+  while (ncurses_wrapper::read_input() == ncurses_wrapper::InputKeys::NONE)
   {
     timer_ptr->tick();
     if (timer_ptr->get_time() >= 1/frame_rate)
