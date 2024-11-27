@@ -17,3 +17,8 @@ void EntityManager::draw()
     e->draw();
   }
 }
+
+void EntityManager::add_entity(Entity::SharedPtr entity)
+{
+  m_entities.push_back(entity);
+}

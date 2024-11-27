@@ -16,7 +16,7 @@ public:
   void draw();
 
   // TODO(juansala): Adds the entity in the next update.
-  void add_entity(Entity::SharedPtr entity) {}
+  void add_entity(Entity::SharedPtr entity);
   void add_entities(std::vector<Entity::SharedPtr>& entities) {}
   
   // Removes the entity identified with `id` in the next update.

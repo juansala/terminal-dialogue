@@ -15,7 +15,7 @@ void Player::update()
     switch (input)
     {
       case ncurses_wrapper::InputKeys::RIGHT:
-        set_position(m_x + m_move_speed, m_y);
+        set_position(m_x - m_move_speed, m_y);
         break;
       case ncurses_wrapper::InputKeys::LEFT:
         set_position(m_x + m_move_speed, m_y);

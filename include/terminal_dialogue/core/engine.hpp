@@ -8,7 +8,7 @@
 class Engine
 {
 public:
-  Engine() {}; // TODO(juansala): Add a Game::SharedPtr parameter
+  Engine(); // TODO(juansala): Add a Game::SharedPtr parameter
   ~Engine() {}
 
   void update() { game.update(); }
@@ -17,6 +17,7 @@ public:
 private:
   Timer::SharedPtr m_timer;
   Game game; // Use a smart pointer?
+  double m_frame_rate;
 };
 
 #endif
