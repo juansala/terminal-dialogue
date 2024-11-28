@@ -17,7 +17,7 @@ public:
 
 protected:
   // Characteristics, score, buffs/debuffs, etc are protected attributes
-  Geometry::SharedPtr m_geom;
+  // Geometry::SharedPtr m_geom;
   int m_move_speed;
 };
 

@@ -26,7 +26,6 @@ protected:
   int m_y;
   std::size_t m_id;
   bool m_is_active;
-  Geometry::SharedPtr geom;
 };
 
 #endif
