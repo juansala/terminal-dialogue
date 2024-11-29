@@ -33,20 +33,20 @@ void ncurses_wrapper::initialize_pairs()
   }
 }
 
-void ncurses_wrapper::window_refresh(Window* win_ptr)
+void ncurses_wrapper::window_refresh(WindowSharedPtr win_ptr)
 {
   if (!win_ptr)
     refresh();
   else
-    wrefresh(win_ptr);
+    wrefresh(win_ptr.get());
 }
 
-void ncurses_wrapper::window_clear(Window* win_ptr)
+void ncurses_wrapper::window_clear(WindowSharedPtr win_ptr)
 {
   if (!win_ptr)
     erase();
   else
-    werase(win_ptr);
+    werase(win_ptr.get());
 }
 
 void ncurses_wrapper::restore_terminal_settings()
@@ -61,7 +61,8 @@ int ncurses_wrapper::read_input()
 
 void ncurses_wrapper::add_pixel_char(int x, int y, unsigned int pixel_type, 
                                      ncurses_wrapper::ColorPair color_pair, 
-                                     Window* win_ptr, unsigned int attribute)
+                                     WindowSharedPtr win_ptr, 
+                                     unsigned int attribute)
 {
   unsigned int pixel = pixel_type | COLOR_PAIR(color_pair.id) | attribute;
   // TODO(juansala): Handle character attributes.
@@ -73,7 +74,7 @@ void ncurses_wrapper::add_pixel_char(int x, int y, unsigned int pixel_type,
   }
   else
   {
-    mvwaddch(win_ptr, y, x, pixel);
+    mvwaddch(win_ptr.get(), y, x, pixel);
     // wrefresh(win_ptr); // Need this refresh here?
   }
 }

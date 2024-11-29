@@ -1,6 +1,9 @@
 #ifndef NCURSES_WRAPPER_HPP
 #define NCURSES_WRAPPER_HPP
 
+#include <array>
+#include <memory>
+
 #include <ncurses.h>
 
 // This file is meant to lay a newer, easier interface for drawing graphics in
@@ -12,16 +15,16 @@
 // Is graphics something that should eventually be handled by the GPU? I would
 // guess that's not necessary (perhaps impossible) given it's literally text.
 
-// TODO(juansala): Convert raw pointers to smart pointers.
 // TODO(juansala): Auto-select this square font: https://strlen.com/square/
 // TODO(juansala): Redefine functions using outdated types (e.g. short).
 // TODO(juansala): Switch to std::array for best modern practice (constexpr).
 // TODO(juansala): Add multiple windows.
 
-using Window = WINDOW;
-
 namespace ncurses_wrapper
 {
+  using Window = WINDOW;
+  using WindowSharedPtr = std::shared_ptr<Window>;
+
   struct Color
   {
     uint8_t red;
@@ -60,10 +63,10 @@ namespace ncurses_wrapper
     static constexpr ColorPair CLASSIC_GREEN = {DefaultColors::GREEN,
                                                 DefaultColors::BLACK, 3};
     static const size_t n_pairs = 4;
-    static constexpr ColorPair pairs[n_pairs] = {CLASSIC,
-                                                 CLASSIC_RED,
-                                                 CLASSIC_BLUE,
-                                                 CLASSIC_GREEN};
+    static constexpr std::array<ColorPair, n_pairs> pairs = {CLASSIC,
+                                                             CLASSIC_RED,
+                                                             CLASSIC_BLUE,
+                                                             CLASSIC_GREEN};
   };
 
   // TODO(juansala): Track imported colors using an array or map. Keys could be
@@ -146,16 +149,16 @@ namespace ncurses_wrapper
 
   // void parse_color_file();
 
-  void window_refresh(Window* win_ptr = nullptr);
+  void window_refresh(WindowSharedPtr win_ptr = nullptr);
 
-  void window_clear(Window* win_ptr = nullptr);
+  void window_clear(WindowSharedPtr win_ptr = nullptr);
 
   void restore_terminal_settings();
 
   int read_input();
 
   void add_pixel_char(int x, int y, unsigned int pixel_type, 
-                      ColorPair color_pair, Window* win_ptr = nullptr,
+                      ColorPair color_pair, WindowSharedPtr win_ptr = nullptr,
                       unsigned int attribute = CharAttributes::normal);
 
 };
