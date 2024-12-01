@@ -3,7 +3,8 @@ add_library(graphics
             rectangle.cpp 
             geometry.cpp 
             renderer.cpp 
-            ncurses_wrapper.cpp)
+            ncurses_wrapper.cpp
+            bresenham.cpp)
 
 # Add include directories
 target_include_directories(graphics PUBLIC ${CMAKE_SOURCE_DIR}/include)

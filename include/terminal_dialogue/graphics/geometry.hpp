@@ -12,7 +12,7 @@ public:
   using ColorPair = ncurses_wrapper::ColorPair;
   Geometry() {}
   Geometry(int x, int y, char pixel_type);
-  ~Geometry() {} // TODO(juansala): Make virtual?
+  ~Geometry() {}
 
   virtual void draw() {}
   int get_x() { return m_x; }
@@ -67,6 +67,8 @@ public:
   virtual void draw() override;
 
 protected:
+  int m_x_end;
+  int m_y_end;
   ColorPair m_color;
 };
 

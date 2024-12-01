@@ -1,4 +1,5 @@
 #include "terminal_dialogue/graphics/geometry.hpp"
+#include "terminal_dialogue/graphics/bresenham.hpp"
 
 Geometry::Geometry(int x, int y, char pixel_type)
   : m_x{ x },
@@ -32,10 +33,13 @@ void Point::draw()
 
 Line::Line(int x_i, int y_i, int x_f, int y_f, char pixel_type, ColorPair color)
   : Geometry { x_i, y_i, pixel_type },
+    m_x_end { x_f },
+    m_y_end { y_f },
     m_color { color }
 {}
 
-// TODO(juansala): Use Bresenham algorithm to draw lines between arbitrary
-// points.
 void Line::draw()
-{}
+{
+  // TODO(juansala): Refactor Bresenham to get points and then draw the points
+  draw_line(m_x, m_y, m_x_end, m_y_end);
+}
