@@ -8,11 +8,9 @@
 // TODO(juansala): Wrap the common ncurses function calls into a convenient
 // function or class (maybe ScreenManager?).
 
-class DialogueEntity
-{
+class DialogueEntity {
 public:
-  DialogueEntity()
-  {
+  DialogueEntity() {
     m_name = "entity"; // TODO: Look into static local variables for counting?
     m_wpm = 200;
     m_color_pair = COLOR_PAIR(0);
@@ -23,20 +21,17 @@ public:
   : m_name {name}, // TODO: Learn about std::string_view for better type to use.
     m_wpm {wpm},
     m_color_pair {color_pair}, // TODO: Init using RGB values.
-    m_pause_time {pause_time}
-  {}
+    m_pause_time {pause_time} {}
 
   std::string name() { return m_name; }
   void set_speed(int wpm) { m_wpm = wpm; }
   void set_color(int color_pair) { m_color_pair = color_pair; }
   void set_pause_time(int pause_time) { m_pause_time = pause_time; }
 
-  void speak(WINDOW* win, int xy[], std::string &msg, bool print) const
-  {
+  void speak(WINDOW* win, int xy[], std::string &msg, bool print) const {
     wmove(win, xy[0], xy[1]);
   
-    if (!print)
-    {
+    if (!print) {
       DialogueState state = TALKING;
       int millis_per_c = 1 / (m_wpm * 4.5 * 1/6e4); // TODO: Use avg char/word from language.
       auto pause_start_time = std::chrono::high_resolution_clock::now(); // TODO: Replace definition w/ correct type.
@@ -45,22 +40,17 @@ public:
       int i = 0;
       int dt = 0;
 
-      while(i < msg.length())
-      {
-        if (state == PAUSE)
-        {
+      while(i < msg.length()) {
+        if (state == PAUSE) {
           current_time = std::chrono::high_resolution_clock::now();
           dt = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - pause_start_time).count();
-          if (dt > m_pause_time)
-          {
+          if (dt > m_pause_time) {
             state = TALKING;
             i++;
           }
         }
-        else if (state == TALKING)
-        {
-          if (msg[i] == '.' || msg[i] == '!' || msg[i] == '?' || msg[i] == ',')
-          {
+        else if (state == TALKING) {
+          if (msg[i] == '.' || msg[i] == '!' || msg[i] == '?' || msg[i] == ',') {
             state = PAUSE;      
             pause_start_time = std::chrono::high_resolution_clock::now();
             waddch(win, msg[i] | m_color_pair);
@@ -70,8 +60,7 @@ public:
 
           auto current_time = std::chrono::high_resolution_clock::now();
           dt = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - last_time).count();
-          if (dt >= millis_per_c)
-          {
+          if (dt >= millis_per_c) {
             waddch(win, msg[i] | m_color_pair);
             wrefresh(win);
             last_time = std::chrono::high_resolution_clock::now();
@@ -80,18 +69,15 @@ public:
         }
       }
     }
-    else
-    {
-      for(int i = 0; i < msg.length(); i++)
-      {
+    else {
+      for(int i = 0; i < msg.length(); i++) {
         waddch(win, msg[i] | m_color_pair);
         wrefresh(win);
       }
     }
   }
 
-  enum DialogueState
-  {
+  enum DialogueState {
     TALKING,
     PAUSE
   };
@@ -104,8 +90,7 @@ private:
   int m_pause_time; // pause duration, in ms
 };
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
   initscr();
   noecho();
   cbreak();

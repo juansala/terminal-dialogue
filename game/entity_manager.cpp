@@ -1,24 +1,19 @@
 #include "terminal_dialogue/game/entity_manager.hpp"
 
-void EntityManager::update()
-{
-  for (auto e : m_entities)
-  {
-    e->update();
+void EntityManager::Update() {
+  for (auto e : m_entities) {
+    e->Update();
   }
 
-  draw();
+  Draw();
 }
 
-void EntityManager::draw()
-{
-  for (auto e : m_entities)
-  {
-    e->draw();
+void EntityManager::Draw() {
+  for (auto e : m_entities) {
+    e->Draw();
   }
 }
 
-void EntityManager::add_entity(Entity::SharedPtr entity)
-{
+void EntityManager::AddEntity(Entity::SharedPtr entity) {
   m_entities.push_back(entity);
 }

@@ -20,53 +20,48 @@
 // TODO(juansala): Switch to std::array for best modern practice (constexpr).
 // TODO(juansala): Add multiple windows.
 
-namespace ncurses_wrapper
-{
+namespace ncurses_wrapper {
   using Window = WINDOW;
   using WindowSharedPtr = std::shared_ptr<Window>;
 
-  struct Color
-  {
+  struct Color {
     uint8_t red;
     uint8_t green;
     uint8_t blue;
     size_t id;
   };
 
-  struct DefaultColors
-  {
-    static constexpr Color BLACK = {255, 255, 255, 0};
-    static constexpr Color RED = {255, 0, 0, 1};
-    static constexpr Color GREEN = {0, 255, 0, 2};
-    static constexpr Color YELLOW = {255, 255, 0, 3};
-    static constexpr Color BLUE = {0, 0, 255, 4};
-    static constexpr Color MAGENTA = {255, 0, 255, 5};
-    static constexpr Color CYAN = {0, 255, 255, 6};
-    static constexpr Color WHITE = {0, 0, 0, 7};
+  namespace default_colors {
+    constexpr Color kBlack = {255, 255, 255, 0};
+    constexpr Color kRed = {255, 0, 0, 1};
+    constexpr Color kGreen = {0, 255, 0, 2};
+    constexpr Color kYellow = {255, 255, 0, 3};
+    constexpr Color kBlue = {0, 0, 255, 4};
+    constexpr Color kMagenta = {255, 0, 255, 5};
+    constexpr Color kCyan = {0, 255, 255, 6};
+    constexpr Color kWhite = {0, 0, 0, 7};
   };
 
-  struct ColorPair
-  {
+  struct ColorPair {
     Color foreground;
     Color background;
     size_t id;
   };
 
-  struct DefaultColorPairs
-  {
-    static constexpr ColorPair CLASSIC = {DefaultColors::WHITE, 
-                                          DefaultColors::BLACK, 0};
-    static constexpr ColorPair CLASSIC_RED = {DefaultColors::RED,
-                                              DefaultColors::BLACK, 1};
-    static constexpr ColorPair CLASSIC_BLUE = {DefaultColors::BLUE,
-                                               DefaultColors::BLACK, 2};
-    static constexpr ColorPair CLASSIC_GREEN = {DefaultColors::GREEN,
-                                                DefaultColors::BLACK, 3};
-    static const size_t n_pairs = 4;
-    static constexpr std::array<ColorPair, n_pairs> pairs = {CLASSIC,
-                                                             CLASSIC_RED,
-                                                             CLASSIC_BLUE,
-                                                             CLASSIC_GREEN};
+  namespace default_color_pairs {
+    constexpr ColorPair kClassic = {default_colors::kWhite,
+                                    default_colors::kBlack, 0};
+    constexpr ColorPair kClassicRed = {default_colors::kRed,
+                                       default_colors::kBlack, 1};
+    constexpr ColorPair kClassicBlue = {default_colors::kBlue,
+                                        default_colors::kBlack, 2};
+    constexpr ColorPair kClassicGreen = {default_colors::kGreen,
+                                         default_colors::kBlack, 3};
+    constexpr size_t kNPairs = 4;
+    static constexpr std::array<ColorPair, kNPairs> kPairs = {kClassic,
+                                                              kClassicRed,
+                                                              kClassicBlue,
+                                                              kClassicGreen};
   };
 
   // TODO(juansala): Track imported colors using an array or map. Keys could be
@@ -79,87 +74,84 @@ namespace ncurses_wrapper
     // static const ColorPair color_pairs[NUM_COLOR_PAIRS];
   // };
 
-  struct CharAttributes
-  {
+  namespace char_attributes {
     // TODO(juansala): Check type conversions.
-    static const unsigned int normal = A_NORMAL;             // Normal display
-    static const unsigned int highlight = A_STANDOUT;        // Highlighting
-    static const unsigned int underline = A_UNDERLINE;       // Underlining
-    static const unsigned int reverse_video = A_REVERSE;     // Reverse video
-    static const unsigned int blinking = A_BLINK;            // Blinking
-    static const unsigned int dim = A_DIM;                   // Half bright
-    static const unsigned int bold = A_BOLD;                 // Bold
-    static const unsigned int protect = A_PROTECT;           // Protected mode
-    static const unsigned int invisible = A_INVIS;           // Invisible mode
-    static const unsigned int alt_char_set = A_ALTCHARSET;   // Alternate char set
-    static const unsigned int extract = A_CHARTEXT;          // Bit-mask to extract a character
+    constexpr unsigned int kNormal = A_NORMAL;             // Normal display
+    constexpr unsigned int kHighlight = A_STANDOUT;        // Highlighting
+    constexpr unsigned int kUnderline = A_UNDERLINE;       // Underlining
+    constexpr unsigned int kReverseVideo = A_REVERSE;     // Reverse video
+    constexpr unsigned int kBlinking = A_BLINK;            // Blinking
+    constexpr unsigned int kDim = A_DIM;                   // Half bright
+    constexpr unsigned int kBold = A_BOLD;                 // Bold
+    constexpr unsigned int kProtect = A_PROTECT;           // Protected mode
+    constexpr unsigned int kInvisible = A_INVIS;           // Invisible mode
+    constexpr unsigned int kAltCharSet = A_ALTCHARSET;   // Alternate char set
+    constexpr unsigned int kExtract = A_CHARTEXT;          // Bit-mask to extract a character
   };
 
   // TODO(juansala): Special chars not displaying properly. Check locale.
-  namespace SpecialChars
-  {
-    inline unsigned int block = ACS_BLOCK;             // solid square block
-    inline unsigned int board = ACS_BOARD;             // board of squares
-    inline unsigned int bottom_tee = ACS_BTEE;         // bottom tee
-    inline unsigned int bullet = ACS_BULLET;           // bullet
-    inline unsigned int checker_board = ACS_CKBOARD;   // checker board
-    inline unsigned int down_arrow = ACS_DARROW;       // arrow pointing down
-    inline unsigned int degree = ACS_DEGREE;           // degree symbol
-    inline unsigned int diamond = ACS_DIAMOND;         // diamond
-    inline unsigned int ge_sign = ACS_GEQUAL;          // >=
-    inline unsigned int hline = ACS_HLINE;             // horizontal line
-    inline unsigned int lantern = ACS_LANTERN;         // lantern symbol
-    inline unsigned int left_arrow = ACS_LARROW;       // arrow pointing left
-    inline unsigned int le_sign = ACS_LEQUAL;          // less-than-or-equal-to
-    inline unsigned int ll_corner = ACS_LLCORNER;      // lower left-hand corner
-    inline unsigned int lr_corner = ACS_LRCORNER;      // lower right-hand corner
-    inline unsigned int left_tee = ACS_LTEE;           // left tee
-    inline unsigned int ne_sign = ACS_NEQUAL;          // not-equal
-    inline unsigned int pi = ACS_PI;                   // greek pi
-    inline unsigned int plus_minus = ACS_PLMINUS;      // plus/minus
-    inline unsigned int plus = ACS_PLUS;               // plus
-    inline unsigned int right_arrow = ACS_RARROW;      // arrow pointing right
-    inline unsigned int right_tee = ACS_RTEE;          // right tee
-    inline unsigned int scan_line_1 = ACS_S1;          // scan line 1
-    inline unsigned int scan_line_3 = ACS_S3;          // scan line 3
-    inline unsigned int scan_line_7 = ACS_S7;          // scan line 7
-    inline unsigned int scan_line_9 = ACS_S9;          // scan line 9
-    inline unsigned int sterling = ACS_STERLING;       // pound-sterling
-    inline unsigned int top_tee = ACS_TTEE;            // top tee
-    inline unsigned int up_arrow = ACS_UARROW;         // arrow pointing up
-    inline unsigned int ul_corner = ACS_ULCORNER;      // upper left-hand corner
-    inline unsigned int ur_corner = ACS_URCORNER;      // upper right-hand corner
-    inline unsigned int vline = ACS_VLINE;             // vertical line
+  namespace special_chars {
+    inline const unsigned int kBlock = ACS_BLOCK;             // solid square block
+    inline const unsigned int kBoard = ACS_BOARD;             // board of squares
+    inline const unsigned int kBottomTee = ACS_BTEE;         // bottom tee
+    inline const unsigned int kBullet = ACS_BULLET;           // bullet
+    inline const unsigned int kCheckerBoard = ACS_CKBOARD;   // checker board
+    inline const unsigned int kDownArrow = ACS_DARROW;       // arrow pointing down
+    inline const unsigned int kDegree = ACS_DEGREE;           // degree symbol
+    inline const unsigned int kDiamond = ACS_DIAMOND;         // diamond
+    inline const unsigned int kGreaterThanOrEqual = ACS_GEQUAL;          // >=
+    inline const unsigned int kHLine = ACS_HLINE;             // horizontal line
+    inline const unsigned int kLantern = ACS_LANTERN;         // lantern symbol
+    inline const unsigned int kLeftArrow = ACS_LARROW;       // arrow pointing left
+    inline const unsigned int kLessThanOrEqual = ACS_LEQUAL;          // less-than-or-equal-to
+    inline const unsigned int kLowerLeftCorner = ACS_LLCORNER;      // lower left-hand corner
+    inline const unsigned int kLowerRightCorner = ACS_LRCORNER;      // lower right-hand corner
+    inline const unsigned int kLeftTee = ACS_LTEE;           // left tee
+    inline const unsigned int kNotEqual = ACS_NEQUAL;          // not-equal
+    inline const unsigned int kPi = ACS_PI;                   // greek pi
+    inline const unsigned int kPlusMinus = ACS_PLMINUS;      // plus/minus
+    inline const unsigned int kPlus = ACS_PLUS;               // plus
+    inline const unsigned int kRightArrow = ACS_RARROW;      // arrow pointing right
+    inline const unsigned int kRightTee = ACS_RTEE;          // right tee
+    inline const unsigned int kScanLine_1 = ACS_S1;          // scan line 1
+    inline const unsigned int kScanLine_3 = ACS_S3;          // scan line 3
+    inline const unsigned int kScanLine_7 = ACS_S7;          // scan line 7
+    inline const unsigned int kScanLine_9 = ACS_S9;          // scan line 9
+    inline const unsigned int kSterling = ACS_STERLING;       // pound-sterling
+    inline const unsigned int kTopTee = ACS_TTEE;            // top tee
+    inline const unsigned int kUpArrow = ACS_UARROW;         // arrow pointing up
+    inline const unsigned int kUpperLeftCorner = ACS_ULCORNER;      // upper left-hand corner
+    inline const unsigned int kUpperRightCorner = ACS_URCORNER;      // upper right-hand corner
+    inline const unsigned int kVLine = ACS_VLINE;             // vertical line
   };
 
-  namespace InputKeys
-  {
-    inline const unsigned int NONE = ERR;
-    inline const unsigned int UP = KEY_UP;
-    inline const unsigned int LEFT = KEY_LEFT;
-    inline const unsigned int RIGHT = KEY_RIGHT;
-    inline const unsigned int DOWN = KEY_DOWN;
-    inline const unsigned int SPACE = ' ';
+  namespace input_keys {
+    constexpr unsigned int kNone = ERR;
+    constexpr unsigned int kUp = KEY_UP;
+    constexpr unsigned int kLeft = KEY_LEFT;
+    constexpr unsigned int kRight = KEY_RIGHT;
+    constexpr unsigned int kDown = KEY_DOWN;
+    constexpr unsigned int kSpace = ' ';
   }
 
-  void initialize(bool one_char, bool no_echo, bool special_keys, 
+  void Initialize(bool one_char, bool no_echo, bool special_keys, 
                   bool use_color, bool no_delay=true);
 
-  void initialize_pairs();
+  void InitializePairs();
 
   // void parse_color_file();
 
-  void window_refresh(WindowSharedPtr win_ptr = nullptr);
+  void WindowRefresh(WindowSharedPtr win_ptr = nullptr);
 
-  void window_clear(WindowSharedPtr win_ptr = nullptr);
+  void WindowClear(WindowSharedPtr win_ptr = nullptr);
 
-  void restore_terminal_settings();
+  void RestoreTerminalSettings();
 
-  int read_input();
+  int ReadInput();
 
-  void add_pixel_char(int x, int y, unsigned int pixel_type, 
-                      ColorPair color_pair, WindowSharedPtr win_ptr = nullptr,
-                      unsigned int attribute = CharAttributes::normal);
+  void AddPixelChar(int x, int y, unsigned int pixel_type,
+                    ColorPair color_pair, WindowSharedPtr win_ptr = nullptr,
+                    unsigned int attribute = char_attributes::kNormal);
 
 };
 
