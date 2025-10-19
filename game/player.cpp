@@ -1,8 +1,8 @@
 #include "terminal_dialogue/game/player.hpp"
 
 Player::Player(int x, int y, int move_speed)
-: Entity{ x, y },
-  m_move_speed{ move_speed } {}
+: Entity{x, y},
+  m_move_speed{move_speed} {}
   // m_geom{ std::make_shared<Rectangle>(x, y, 'x', 1, 1) }
 
 void Player::Update() {

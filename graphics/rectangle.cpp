@@ -3,9 +3,9 @@
 Rectangle::Rectangle(int x, int y, char pixel_type, int width, int height, 
                      ncurses_wrapper::ColorPair fill, 
                      ncurses_wrapper::ColorPair border)
-  : Shape{ x, y, pixel_type, fill, border},
-    m_width{ width },
-    m_height{ height } {}
+  : Shape{x, y, pixel_type, fill, border},
+    m_width{width},
+    m_height{height} {}
 
 void Rectangle::Draw() {
   // TODO(juansala): Try iterating over y first, then x to follow memory.

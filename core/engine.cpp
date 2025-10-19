@@ -1,7 +1,7 @@
 #include "terminal_dialogue/core/engine.hpp"
 
 Engine::Engine()
-: m_frame_rate{ 60.0 } {
+: m_frame_rate{60.0} {
   ncurses_wrapper::Initialize(true, true, true, true, true);
   m_timer = std::make_shared<Timer>();
 }
