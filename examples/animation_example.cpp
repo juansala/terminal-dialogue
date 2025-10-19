@@ -5,9 +5,8 @@
 #include "terminal_dialogue/graphics/rectangle.hpp"
 #include "terminal_dialogue/utils/timer.hpp"
 
-int main(int argc, char* argv[])
-{
-  ncurses_wrapper::initialize(true, true, true, true, true);
+int main(int argc, char* argv[]) {
+  ncurses_wrapper::Initialize(true, true, true, true, true);
 
   double frame_rate = 60.0;
   Timer::SharedPtr timer_ptr = std::make_shared<Timer>();
@@ -17,22 +16,19 @@ int main(int argc, char* argv[])
   elements.push_back(rect_ptr);
   Renderer renderer;
 
-  while (ncurses_wrapper::read_input() == ncurses_wrapper::InputKeys::NONE)
-  {
-    timer_ptr->tick();
-    if (timer_ptr->get_time() >= 1/frame_rate)
-    {
-      for (auto geom : elements)
-      {
-        geom->set_origin(geom->get_x() + 1, 0.0);
+  while (ncurses_wrapper::ReadInput() == ncurses_wrapper::input_keys::kNone) {
+    timer_ptr->Tick();
+    if (timer_ptr->GetTime() >= 1/frame_rate) {
+      for (auto geom : elements) {
+        geom->SetOrigin(geom->GetX() + 1, 0.0);
       }
-      ncurses_wrapper::window_clear();
-      renderer.draw(elements);
-      ncurses_wrapper::window_refresh();
-      timer_ptr->reset();
+      ncurses_wrapper::WindowClear();
+      renderer.Draw(elements);
+      ncurses_wrapper::WindowRefresh();
+      timer_ptr->Reset();
     }
   }
 
-  ncurses_wrapper::read_input();
-  ncurses_wrapper::restore_terminal_settings();
+  ncurses_wrapper::ReadInput();
+  ncurses_wrapper::RestoreTerminalSettings();
 }

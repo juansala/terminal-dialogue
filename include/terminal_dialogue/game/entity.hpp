@@ -8,18 +8,17 @@
 
 #include "terminal_dialogue/graphics/geometry.hpp"
 
-class Entity
-{
+class Entity {
 public:
   using SharedPtr = std::shared_ptr<Entity>;
   Entity(int x = 0, int y = 0);
   ~Entity() {}
 
-  virtual void update() {};
-  virtual void draw() {};
+  virtual void Update() {};
+  virtual void Draw() {};
 
-  void set_position(int x, int y);
-  void get_position(int& x, int& y);
+  void SetPosition(int x, int y);
+  void GetPosition(int& x, int& y);
 
 protected:
   int m_x;

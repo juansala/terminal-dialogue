@@ -10,10 +10,10 @@
 //
 // URL: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 
-void draw_h_line(int x_i, int y_i, int x_f, int y_f);
+void DrawHLine(int x_i, int y_i, int x_f, int y_f);
 
-void draw_v_line(int x_i, int y_i, int x_f, int y_f);
+void DrawVLine(int x_i, int y_i, int x_f, int y_f);
 
-void draw_line(int x_i, int y_i, int x_f, int y_f);
+void DrawLine(int x_i, int y_i, int x_f, int y_f);
 
 #endif

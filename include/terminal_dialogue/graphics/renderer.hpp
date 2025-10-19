@@ -5,13 +5,12 @@
 
 #include "terminal_dialogue/graphics/rectangle.hpp"
 
-class Renderer
-{
+class Renderer {
 public:
   Renderer() {}
   ~Renderer() {}
 
-  void draw(std::vector<Geometry::SharedPtr>& frame);
+  void Draw(std::vector<Geometry::SharedPtr>& frame);
 };
 
 #endif

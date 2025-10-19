@@ -4,16 +4,15 @@
 #include "terminal_dialogue/game/entity.hpp"
 #include "terminal_dialogue/graphics/rectangle.hpp"
 
-class Player : public Entity
-{
+class Player : public Entity {
 public:
   using SharedPtr = std::shared_ptr<Player>;
   Player() {}
   Player(int x, int y, int move_speed = 1);
   ~Player() {};
 
-  virtual void update() override;
-  virtual void draw() override;
+  virtual void Update() override;
+  virtual void Draw() override;
 
 protected:
   // Characteristics, score, buffs/debuffs, etc are protected attributes

@@ -8,14 +8,13 @@
 #include "terminal_dialogue/game/player.hpp"
 // #include "terminal_dialogue/game/state.hpp"
 
-class Game
-{
+class Game {
 public:
   Game();
   ~Game() {};
 
-  void update();
-  bool is_running() { return m_is_running; }
+  void Update();
+  bool IsRunning() { return m_is_running; }
   
 protected:
   bool m_is_running;

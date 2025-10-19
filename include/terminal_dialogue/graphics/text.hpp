@@ -7,15 +7,13 @@
 // string-based messages such as menu options, dialogue, etc.
 // TODO(juansala): Implement animated dialogue.
 
-class Text
-{
+class Text {
 public:
   Text() {};
   ~Text() {};
 };
 
-class AnimatedText : public Text
-{
+class AnimatedText : public Text {
 public:
   AnimatedText() {};
   ~AnimatedText() {};

@@ -6,22 +6,21 @@
 
 #include "terminal_dialogue/game/entity.hpp"
 
-class EntityManager
-{
+class EntityManager {
 public:
   EntityManager() {}
   ~EntityManager() {}
 
-  void update();
-  void draw();
+  void Update();
+  void Draw();
 
   // TODO(juansala): Adds the entity in the next update.
-  void add_entity(Entity::SharedPtr entity);
-  void add_entities(std::vector<Entity::SharedPtr>& entities) {}
+  void AddEntity(Entity::SharedPtr entity);
+  void AddEntities(std::vector<Entity::SharedPtr>& entities) {}
   
   // Removes the entity identified with `id` in the next update.
-  // void kill_entity(int id);
-  // void kill_entities(std::vector<int>& ids);
+  // void KillEntity(int id);
+  // void KillEntities(std::vector<int>& ids);
 
 private:
   std::vector<Entity::SharedPtr> m_entities;
